@@ -1,5 +1,7 @@
-:root {
+/* :root {
     --blue-bg-color: #3575CA;
+    --hover-blue-bg-color: #3c87ea;
+
 }
 
 * {
@@ -16,7 +18,7 @@ body {
 .container {
     display: grid;
     min-height: 100vh;
-    grid-template-columns: 250px 1fr;
+    grid-template-columns: 300px 1fr;
     grid-template-rows: auto 1fr auto;
     grid-template-areas: 
         "sidebar header"
@@ -43,12 +45,17 @@ header > h1 {
     grid-area: sidebar;
     display: flex;
     flex-direction: column;
+
     padding: 10px;
+    background-color: var(--blue-bg-color);
 }
 
 .sidebar-row {
     display: flex;
     align-items: center;
+    justify-content: space-between;
+
+    padding: 10px;
 }
 
 .icon-container {
@@ -58,29 +65,26 @@ header > h1 {
 }
   
 .icon-container > svg {
-    fill: var(--blue-bg-color);
+    fill: white;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
 .menu-btn {
-    background-color: #fff;
+    background-color: var(--blue-bg-color);
     border: none;
     border-radius: 5px;
-    padding: 5px 10px;
-    margin-left: auto;
+    padding: 2.5px 5px;
+
 }
 
 .menu-btn > svg {
-    stroke: var(--blue-bg-color);
-    stroke-width: 2.5px;
+    stroke: white;
+    stroke-width: 2px;
 }
 
 .menu-btn:hover {
-    background-color: var(--blue-bg-color);
-}
-
-.menu-btn:hover svg {
-    stroke: white;
+    background-color: var(--hover-blue-bg-color);
+    cursor: pointer;
 }
 
 .main-board {   
@@ -94,4 +98,4 @@ footer {
     font-size: 12pt;
     padding: 10px;
     color: var(--blue-bg-color);
-}
+} */

@@ -3,42 +3,51 @@ const projectsArr = [];
 function createProject (title) {
     const projectID = crypto.randomUUID();
     
-    const getProjectID = () => projectID;
-    const getTitle = () => title;
-    const setTitle = (newTitle) => title = newTitle;
+    return {
+        // Title getter/setter
+        get title () {
+            return title;
+        },
+        set title (value) {
+            if (value.length < 1 || value.length > 20)
+                return;
+            title = value;
+        },
 
-    return {projectID, getTitle, getProjectID, setTitle}
-}
-
-
-function loadProjects () {
-    if (localStorage.getItem("projects") !== null) {
-        projectsArr.length = 0;
-        JSON.parse(localStorage.getItem("projects")).forEach(element => {
-            projectsArr.push(element);
-        });
-    } else {
-        localStorage.setItem("projects", JSON.stringify([createProject("Default")]));
+        // Unique ID getter
+        get projectID () {
+            return projectID;
+        }
     }
 }
 
-function addNewProject (title) {
+
+// function loadProjects () {
+//     if (localStorage.getItem("projects") !== null) {
+//         projectsArr.length = 0;
+//         JSON.parse(localStorage.getItem("projects")).forEach(element => {
+//             projectsArr.push(element);
+//         });
+//     } else {
+//         localStorage.setItem("projects", JSON.stringify([createProject("Default")]));
+//     }
+// }
+
+function addProject (title) {
     projectsArr.push(createProject(title))
-    setLocalStorage();
 } 
 
-function setLocalStorage () {
-    localStorage.removeItem('projects');
-    localStorage.setItem('projects', JSON.stringify(projectsArr));
-}
+// function setLocalStorage () {
+//     localStorage.removeItem('projects');
+//     localStorage.setItem('projects', JSON.stringify(projectsArr));
+// }
 
-function deleteProject (id) {
+function deleteProject (uniqueID) {
     projectsArr.forEach((project, index) => {
-        if (project.projectID == id) {
+        if (project.projectID == uniqueID) {
             projectsArr.splice(index, 1);
-            setLocalStorage();
         }
     })
 }
 
-export {loadProjects, addNewProject, deleteProject, projectsArr}
+export { addProject, deleteProject }

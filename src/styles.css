@@ -17,7 +17,7 @@ body {
 
 .container {
     display: grid;
-    min-height: 100vh;
+    height: 100vh;
     grid-template-columns: 300px 1fr;
     grid-template-rows: auto 1fr auto;
     grid-template-areas: 
@@ -45,6 +45,7 @@ header > h1 {
     grid-area: sidebar;
     display: flex;
     flex-direction: column;
+    gap: 50px;
 
     padding: 10px;
     background-color: var(--blue-bg-color);
@@ -87,8 +88,113 @@ header > h1 {
     cursor: pointer;
 }
 
+.add-project-btn {
+    padding: 10px;
+    font-size: 16pt;
+    font-weight: bold;
+    border: none;
+    border-radius: 10px;
+    background-color: var(--blue-bg-color);
+    color: white;
+    letter-spacing: 2.5px;
+}
+
+.add-project-btn:hover {
+    color: var(--blue-bg-color);
+    background-color: white;
+    cursor: pointer;
+}
+
+.add-project-btn:active {
+    /* background-color: rgb(230, 228, 228); */
+    background-color: var(--blue-bg-color);
+    color: white;
+    transition: 150ms;
+}
+
+.project-btn-container {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.project-btn {
+    padding: 10px;
+    font-size: 14pt;
+    font-weight: bold;
+    border: none;
+    border-radius: 10px;
+    background-color: var(--blue-bg-color);
+    color: white;
+    letter-spacing: 2px;
+}
+
+.project-btn:hover {
+    background-color: white;
+    color: var(--blue-bg-color);
+}
+
 .main-board {   
     grid-area: main;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    /* height: 300px; */
+
+    padding: 10px;
+    align-items: flex-start;
+    overflow: scroll;
+}
+
+.todo-item {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+
+    padding: 10px;
+    border-radius: 10px;
+    border: 2px solid var(--blue-bg-color);
+    font-size: 12pt;
+    max-width:400px;
+}
+
+.flex-row {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.color-blue {
+    color: var(--blue-bg-color);
+}
+
+.todo-item > p {
+    /* width: 30ch; */
+    text-align: justify;
+}
+
+.flex-row > select {
+    flex: 1;
+    padding: 5px;
+    background-color: white;
+    border: none;
+}
+
+.flex-row > button {
+    flex: 1;
+    padding: 5px;
+    font-size: 14pt;
+    border: none;
+    border-radius: 10px;
+    background-color: white;
+    color: var(--blue-bg-color);
+}
+
+.flex-row > button:hover {
+    color: white;
+    background-color: var(--blue-bg-color);
 }
 
 footer {
@@ -98,4 +204,29 @@ footer {
     font-size: 12pt;
     padding: 10px;
     color: var(--blue-bg-color);
+}
+
+.add-todo-btn {
+    position: fixed;
+    top: 93.5%;
+    left: 95%;
+
+    background-color: white;
+    border: none;
+    border-radius: 50%;
+}
+
+.add-todo-btn > svg {
+    height: 60px;
+    width: 60px;
+    fill: var(--blue-bg-color);
+}
+
+.add-todo-btn:hover {
+    background-color: var(--blue-bg-color);
+    cursor: pointer;
+}
+
+.add-todo-btn:hover > svg {
+    fill: white;
 }

@@ -1,9 +1,11 @@
 import sidebarSVG from "../assets/images/sidebar.svg";
+import { getProjectArr } from "./projectManager.js";
 
 const header = document.querySelector('header');
 const sidebar = document.querySelector('.sidebar');
 const mainBoard = document.querySelector('.main-board');
 const footer = document.querySelector('footer');
+const body = document.querySelector('body');
 
 function loadApplication () {
     // Loading Header
@@ -82,6 +84,162 @@ function loadApplication () {
     sideBarRow.appendChild(iconContainer);
     sideBarRow.appendChild(sidebarToggleBtn);
     sidebar.appendChild(sideBarRow);
+
+    const addProjectBtn = document.createElement('button');
+    addProjectBtn.textContent = 'Add Project';
+    addProjectBtn.classList.add('add-project-btn');
+
+    sidebar.appendChild(addProjectBtn);
+
+    const projectBtnContainer = document.createElement('div');
+    projectBtnContainer.classList.add('project-btn-container');
+    sidebar.appendChild(projectBtnContainer);
+
+    const addTodoBtn = document.createElement('button');
+    addTodoBtn.classList.add('add-todo-btn');
+
+    const plusSvg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+    plusSvg.setAttribute('height', '24px');
+    plusSvg.setAttribute('viewBox', '0 -960 960 960');
+    plusSvg.setAttribute('width', '24px');
+
+    const plusPath = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+    plusPath.setAttribute('d', 'M440-440H200v-80h240v-240h80v240h240v80H520v240h-80v-240Z');
+    plusSvg.appendChild(plusPath);
+    addTodoBtn.appendChild(plusSvg);
+
+    body.appendChild(addTodoBtn);
+
 }
 
-export { loadApplication }
+function createProjectBtn (title) {
+    const projectBtnContainer = document.querySelector('.project-btn-container');
+
+    const projectBtn = document.createElement('button');
+    projectBtn.classList.add('project-btn');
+    projectBtn.textContent = title;
+
+    projectBtnContainer.appendChild(projectBtn);
+}
+
+function createTodoCard (title, description, dueDate, status, priority, projectID) {
+    const todoItem = document.createElement('div');
+    todoItem.classList.add('todo-item');
+
+    const titleHeading = document.createElement('h1');
+    titleHeading.classList.add('color-blue');
+    titleHeading.textContent = title;
+    todoItem.appendChild(titleHeading);
+
+    const descriptionPara = document.createElement('p');
+    descriptionPara.textContent = description;
+    todoItem.appendChild(descriptionPara);
+
+    const flexRowOne = document.createElement('div');
+    flexRowOne.classList.add('flex-row');
+
+    const dueDatePara = document.createElement('p');
+    const dueDateSpan = document.createElement('span');
+    dueDateSpan.textContent = "Due Date:";
+    dueDateSpan.classList.add('color-blue');
+    dueDatePara.appendChild(dueDateSpan);
+    dueDatePara.textContent = dueDate;
+    flexRowOne.appendChild(dueDatePara);
+
+    const statusPara = document.createElement('p');
+    const statusSpan = document.createElement('span');
+    statusSpan.textContent = "Status:";
+    statusSpan.classList.add('color-blue');
+    statusPara.appendChild(statusSpan);
+    statusPara.textContent = status;
+    flexRowOne.appendChild(statusPara);
+
+    todoItem.appendChild(flexRowOne);
+
+    const flexRowTwo = document.createElement('div');
+    flexRowTwo.classList.add('flex-row');
+
+    const priorityPara = document.createElement('p');
+    priorityPara.classList.add('color-blue');
+    priorityPara.textContent = 'Priority:';
+    flexRowTwo.appendChild(priorityPara);
+
+    const priorityName = crypto.randomUUID();
+    const lowInput = document.createElement('input');
+    lowInput.setAttribute('type', 'radio');
+    lowInput.setAttribute('id', `low-${priorityName}`);
+    lowInput.setAttribute('name', `${priorityName}`);
+    lowInput.setAttribute('value', 'low');
+    const lowLabel = document.createElement('label');
+    lowLabel.setAttribute('for', `low-${priorityName}`);
+    lowLabel.textContent = 'Low';
+    flexRowTwo.appendChild(lowInput);
+    flexRowTwo.appendChild(lowLabel);
+
+    const mediumInput = document.createElement('input');
+    mediumInput.setAttribute('type', 'radio');
+    mediumInput.setAttribute('id', `medium-${priorityName}`);
+    mediumInput.setAttribute('name', `${priorityName}`);
+    mediumInput.setAttribute('value', 'medium');
+    const mediumLabel = document.createElement('label');
+    mediumLabel.setAttribute('for', `medium-${priorityName}`);
+    mediumLabel.textContent = 'Medium';
+    flexRowTwo.appendChild(mediumInput);
+    flexRowTwo.appendChild(mediumLabel);
+
+    const highInput = document.createElement('input');
+    highInput.setAttribute('type', 'radio');
+    highInput.setAttribute('id', `high-${priorityName}`);
+    highInput.setAttribute('name', `${priorityName}`);
+    highInput.setAttribute('value', `high`);
+    const highLabel = document.createElement('label');
+    highLabel.setAttribute('for', `high-${priorityName}`);
+    highLabel.textContent = 'High';
+    flexRowTwo.appendChild(highInput);
+    flexRowTwo.appendChild(highLabel);  
+    
+    todoItem.appendChild(flexRowTwo);
+
+    const flexRowThree = document.createElement('div');
+    flexRowThree.classList.add('flex-row');
+
+    const projectsLabel = document.createElement('label');
+    projectsLabel.classList.add('color-blue');
+    projectsLabel.setAttribute('for', 'projects');
+    projectsLabel.textContent = 'Choose Project:';
+    flexRowThree.appendChild(projectsLabel);
+
+    const projectSelect = document.createElement('select');
+    projectSelect.setAttribute('name', 'projects');
+    projectSelect.setAttribute('id', 'projects');
+
+    getProjectArr().forEach(project => {
+        const projectOption = document.createElement('option');
+        projectOption.setAttribute('value', `${project.projectID}`);
+        projectOption.textContent = project.title;
+        projectSelect.appendChild(projectOption);
+    });
+
+    flexRowThree.appendChild(projectSelect);
+    todoItem.appendChild(flexRowThree);
+
+    const flexRowFour = document.createElement('div');
+    flexRowFour.classList.add('flex-row');
+
+    const viewBtn = document.createElement('button');
+    viewBtn.classList.add('view-btn');
+    viewBtn.textContent = 'View';
+    flexRowFour.appendChild(viewBtn);
+
+    const removeBtn = document.createElement('button');
+    removeBtn.classList.add('remove-btn');
+    removeBtn.textContent = 'Remove';
+    flexRowFour.appendChild(removeBtn);
+
+    todoItem.appendChild(flexRowFour);
+
+    mainBoard.appendChild(todoItem);
+
+}
+
+export { loadApplication, createProjectBtn, createTodoCard }

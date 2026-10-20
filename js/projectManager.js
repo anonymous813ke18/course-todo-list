@@ -5,19 +5,20 @@ function createProject (title) {
     
     return {
         // Title getter/setter
-        get title () {
-            return title;
-        },
-        set title (value) {
-            if (value.length < 1 || value.length > 20)
-                return;
-            title = value;
-        },
+        // get title () {
+        //     return title;
+        // },
+        // set title (value) {
+        //     if (value.length < 1 || value.length > 20)
+        //         return;
+        //     title = value;
+        // },
 
-        // Unique ID getter
-        get projectID () {
-            return projectID;
-        }
+        // // Unique ID getter
+        // get projectID () {
+        //     return projectID;
+        // }
+        title, projectID,
     }
 }
 
@@ -50,4 +51,28 @@ function deleteProject (uniqueID) {
     })
 }
 
-export { addProject, deleteProject }
+function getProjectArr () {
+    /*
+        const tempStorage = loadProjects();
+
+        if (tempStorage === 0) {
+            addProject('Default');
+            setLocalStorageProjects(JSON.stringify(projectsArr))
+        } else {
+            projectsArr.length = 0;
+            JSON.parse(tempStorage).forEach(element => {
+                projectsArr.push(element);
+            })    
+        }
+    */
+
+    if (projectsArr.length === 0) {
+        addProject('Default');
+        addProject('Project 1');
+        addProject('Project 2');
+    }
+
+    return [...projectsArr];
+}
+
+export { addProject, deleteProject, getProjectArr }

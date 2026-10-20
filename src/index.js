@@ -1,4 +1,15 @@
 import "./styles.css"
-import { loadApplication } from "../js/screenController.js";
+import { loadApplication, createProjectBtn, createTodoCard } from "../js/screenController.js";
+import { addProject, getProjectArr } from "../js/projectManager.js";    
 
-loadApplication();
+function renderApplication () {
+    let projectArrCopy = getProjectArr();
+
+    loadApplication();
+    projectArrCopy.forEach(project => {
+        createProjectBtn(project.title)
+        console.log(project);
+    })
+}
+
+renderApplication();

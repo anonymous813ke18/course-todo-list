@@ -3,23 +3,7 @@ const projectsArr = [];
 function createProject (title) {
     const projectID = crypto.randomUUID();
     
-    return {
-        // Title getter/setter
-        // get title () {
-        //     return title;
-        // },
-        // set title (value) {
-        //     if (value.length < 1 || value.length > 20)
-        //         return;
-        //     title = value;
-        // },
-
-        // // Unique ID getter
-        // get projectID () {
-        //     return projectID;
-        // }
-        title, projectID,
-    }
+    return { title, projectID }
 }
 
 
@@ -35,6 +19,9 @@ function createProject (title) {
 // }
 
 function addProject (title) {
+    if (title === "") 
+        return;
+
     projectsArr.push(createProject(title))
 } 
 
@@ -68,8 +55,6 @@ function getProjectArr () {
 
     if (projectsArr.length === 0) {
         addProject('Default');
-        addProject('Project 1');
-        addProject('Project 2');
     }
 
     return [...projectsArr];

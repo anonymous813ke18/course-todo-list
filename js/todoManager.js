@@ -6,65 +6,67 @@ function CreateTodo (title, description, dueDate, priority, status, projectID) {
     const ID = crypto.randomUUID();
 
     return {
-        // Title getter/setter
-        get title () {
-            return title;
-        },
-        set title (value) {
-            if (value.length < 1 || value.length > 30)
-                return;
+        // // Title getter/setter
+        // get title () {
+        //     return title;
+        // },
+        // set title (value) {
+        //     if (value.length < 1 || value.length > 30)
+        //         return;
 
-            title = value;
-        },
+        //     title = value;
+        // },
 
-        // Description getter/setter
-        get description () {
-            return description;
-        },
-        set description (value) {
-            if (value.length < 1 || value.length > 150)
-                return;
+        // // Description getter/setter
+        // get description () {
+        //     return description;
+        // },
+        // set description (value) {
+        //     if (value.length < 1 || value.length > 150)
+        //         return;
             
-            description = value;
-        },
+        //     description = value;
+        // },
 
-        // Due Date getter/setter
-        get dueDate () {
-            return dueDate;
-        },
-        set dueDate (value) {
-            const parsedDate = parse(value, 'dd-MM-yyyy', new Date());
-            if (isBefore(parsedDate, new Date ()))
-                return;
+        // // Due Date getter/setter
+        // get dueDate () {
+        //     return dueDate;
+        // },
+        // set dueDate (value) {
+        //     const parsedDate = parse(value, 'dd-MM-yyyy', new Date());
+        //     if (isBefore(parsedDate, new Date ()))
+        //         return;
 
-            dueDate = value;
-        },
+        //     dueDate = value;
+        // },
 
-        // Priority getter/setter
-        get priority () {
-            return priority;
-        },
-        set priority (value) {
-            priority = value;
-        },
+        // // Priority getter/setter
+        // get priority () {
+        //     return priority;
+        // },
+        // set priority (value) {
+        //     priority = value;
+        // },
 
-        // Status getter/setter
-        get status () {
-            return status;
-        },
-        set status (value) {
-            status = value;
-        },
+        // // Status getter/setter
+        // get status () {
+        //     return status;
+        // },
+        // set status (value) {
+        //     status = value;
+        // },
 
-        // Project ID getter
-        get projectID () {
-            return projectID;
-        },
+        // // Project ID getter
+        // get projectID () {
+        //     return projectID;
+        // },
 
-        // Unique ID getter
-        get ID () {
-            return ID;
-        },
+        // // Unique ID getter
+        // get ID () {
+        //     return ID;
+        // },
+
+        title, description, dueDate, status, priority, projectID
     }
 }
 
@@ -86,4 +88,8 @@ function updateStatus (uniqueID, value) {
     })
 }
 
-export { addTodo, removeTodo, updateStatus }
+function getTodoArr () {
+    return [...todoArr];
+}
+
+export { addTodo, removeTodo, getTodoArr }

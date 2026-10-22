@@ -39,6 +39,7 @@ header {
 header > h1 {
     text-align: center;
     color: var(--blue-bg-color);
+    margin: auto;
 }
 
 .sidebar {
@@ -54,7 +55,7 @@ header > h1 {
 .sidebar-row {
     display: flex;
     align-items: center;
-    justify-content: space-between;
+    justify-content: center;
 
     padding: 10px;
 }
@@ -71,21 +72,24 @@ header > h1 {
 }
 
 .menu-btn {
-    background-color: var(--blue-bg-color);
+    background-color: white;
     border: none;
     border-radius: 5px;
     padding: 2.5px 5px;
-
 }
 
 .menu-btn > svg {
-    stroke: white;
-    stroke-width: 2px;
+    stroke: var(--blue-bg-color);
+    stroke-width: 3px;
 }
 
 .menu-btn:hover {
-    background-color: var(--hover-blue-bg-color);
+    background-color: var(--blue-bg-color);
     cursor: pointer;
+}
+
+.menu-btn:hover > svg {
+    stroke: white;
 }
 
 .add-project-btn {
@@ -208,7 +212,7 @@ footer {
 
 .add-todo-btn {
     position: fixed;
-    top: 93.5%;
+    top: 93%;
     left: 95%;
 
     background-color: white;
@@ -229,4 +233,53 @@ footer {
 
 .add-todo-btn:hover > svg {
     fill: white;
+}
+
+.hidden {
+    display: none;
+}
+
+.hidden-sidebar {
+    grid-template-columns: 0px 1fr;
+}
+
+.selected {
+    background-color: white;
+    color: var(--blue-bg-color);
+}
+
+.project-modal {
+    margin: auto;
+    gap: 20px;
+    padding: 25px;
+    border: 1px solid gray;
+    border-radius: 10px;
+}
+
+.modal-row {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+
+    margin: 20px;
+}
+
+.modal-row > input {
+    padding: 5px;
+}
+
+.modal-row > button {
+    flex: 1;
+    padding: 10px;
+    background-color: white;
+    border: none;
+    border-radius: 10px;
+    font-size: 12pt;
+    font-weight: bold;
+    color: var(--blue-bg-color);
+}
+
+.modal-row > button:hover {
+    color: white;
+    background-color: var(--blue-bg-color);
 }

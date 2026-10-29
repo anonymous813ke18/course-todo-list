@@ -1,4 +1,5 @@
 import { parse, isBefore, add } from "date-fns";
+import { loadTodos, setLocalStorageTodos } from "./localStorageManager.js";
 
 const todoArr = [];
 
@@ -66,30 +67,82 @@ function CreateTodo (title, description, dueDate, priority, status, projectID) {
         //     return ID;
         // },
 
-        title, description, dueDate, status, priority, projectID
+        ID, title, description, dueDate, status, priority, projectID
     }
 }
 
-function addTodo (title, description, dueDate, priority) {
-    todoArr.push(CreateTodo(title, description, dueDate, priority));
+function addTodo (title, description, dueDate, priority, status, projectID) {
+    todoArr.push(CreateTodo(title, description, dueDate, priority, status, projectID));
+    setLocalStorageTodos(JSON.stringify(todoArr));
 }
 
 function removeTodo (uniqueID) {
     todoArr.forEach((todoItem, index) => {
         if (todoItem.ID === uniqueID)
             todoArr.splice(index, 1);
-    })
+    });
+    setLocalStorageTodos(JSON.stringify(todoArr));
 }
 
 function updateStatus (uniqueID, value) {
     todoArr.forEach(todoItem => {
         if (todoItem.ID === uniqueID)
             todoItem.status = value;
-    })
+    });
+    setLocalStorageTodos(JSON.stringify(todoArr));
+}
+
+function updatePriority (uniqueID, value) {
+    todoArr.forEach(todoItem => {
+        if (todoItem.ID === uniqueID)
+            todoItem.priority = value;
+    });
+    setLocalStorageTodos(JSON.stringify(todoArr));
+}
+
+function updateProject (uniqueID, value) {
+    todoArr.forEach(todoItem => {
+        if (todoItem.ID === uniqueID)
+            todoItem.projectID = value;
+    });
+    setLocalStorageTodos(JSON.stringify(todoArr));
+}
+
+function updateTitle (uniqueID, value) {
+    todoArr.forEach(todoItem => {
+        if (todoItem.ID === uniqueID)
+            todoItem.title = value;
+    });
+    setLocalStorageTodos(JSON.stringify(todoArr));
+}
+
+function updateDescription(uniqueID, value) {
+    todoArr.forEach(todoItem => {
+        if (todoItem.ID === uniqueID)
+            todoItem.description = value;
+    });
+    setLocalStorageTodos(JSON.stringify(todoArr));
 }
 
 function getTodoArr () {
+    const tempStorage = loadTodos();
+    if (tempStorage !== 0) {
+        todoArr.length = 0;
+        JSON.parse(tempStorage).forEach(element => {
+            todoArr.push(element);
+        })  
+    } 
+
     return [...todoArr];
 }
 
-export { addTodo, removeTodo, getTodoArr }
+export { 
+    addTodo, 
+    removeTodo, 
+    getTodoArr, 
+    updateStatus, 
+    updatePriority, 
+    updateProject, 
+    updateTitle, 
+    updateDescription 
+}

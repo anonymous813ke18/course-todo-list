@@ -1,15 +1,13 @@
 import "./styles.css"
-import { loadApplication, createProjectBtn, createTodoCard } from "../js/screenController.js";
-import { addProject, getProjectArr } from "../js/projectManager.js";    
+import { loadApplication, createProjectBtn, createTodoCard, refreshMainBoard } from "../js/screenController.js";
+import { addProject, getProjectArr } from "../js/projectManager.js";  
+import { addEventListeners } from "../js/eventListeners.js";  
 
 function renderApplication () {
-    let projectArrCopy = getProjectArr();
-
     loadApplication();
-    projectArrCopy.forEach(project => {
-        createProjectBtn(project.title)
-        console.log(project);
-    })
+    addEventListeners();
+    const projectBtnContainer = document.querySelector('.project-btn-container');
+    projectBtnContainer.firstChild.click();
 }
 
 renderApplication();

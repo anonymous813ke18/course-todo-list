@@ -187,7 +187,7 @@ header > h1 {
 }
 
 .flex-row > button {
-    flex: 1;
+    flex: auto;
     padding: 5px;
     font-size: 14pt;
     border: none;
@@ -248,7 +248,10 @@ footer {
     color: var(--blue-bg-color);
 }
 
-.project-modal {
+.project-modal,
+.add-todo-modal,
+.todo-title-modal,
+.todo-description-modal {
     margin: auto;
     gap: 20px;
     padding: 25px;
@@ -262,6 +265,11 @@ footer {
     gap: 10px;
 
     margin: 20px;
+}
+
+.modal-row > input,
+.modal-row > select {
+    flex: 1;
 }
 
 .modal-row > input {
@@ -282,4 +290,21 @@ footer {
 .modal-row > button:hover {
     color: white;
     background-color: var(--blue-bg-color);
+}
+
+.flex-row > button.edit-button {
+    flex: 0 0 auto;
+    align-self: center;
+}
+
+.flex-row > button.edit-button svg {
+    pointer-events: none;
+}
+
+.flex-row > button.edit-button:hover {
+    background-color: #fff;
+}
+
+.flex-row > button.edit-button:hover svg {
+    fill: goldenrod;
 }

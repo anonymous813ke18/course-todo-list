@@ -1,15 +1,8 @@
-import { createSideBar } from "./sidebar.js";
 import { refreshMainBoard, createAddProjectModal, createAddTodoModal, createEditTodoTitleModal, createEditTodoDescriptionModal } from "./screenController.js"
-import { removeTodo, updateStatus, updatePriority, updateProject, updateTitle } from "./todoManager.js";
+import { removeTodo, updateStatus, updatePriority, updateProject } from "./todoManager.js";
 
 const mainContainer = document.querySelector('.container');
-const header = document.querySelector('header');
 const sidebar = document.querySelector('.sidebar');
-const mainboard = document.querySelector('.main-board');
-const footer = document.querySelector('footer');
-const addProjectBtn = document.querySelector('.add-project-btn');
-const projectBtnContainer = document.querySelector('.project-btn-container');
-const addTodoBtn = document.querySelector('.add-todo-btn');
 
 function addEventListeners () {
     // Adding event listener to open and close the sidebar

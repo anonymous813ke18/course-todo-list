@@ -1,3 +1,5 @@
+import { loadProjects, setLocalStorageProjects } from "./localStorageManager.js";
+
 const projectsArr = [];
 
 function createProject (title) {
@@ -6,29 +8,13 @@ function createProject (title) {
     return { title, projectID }
 }
 
-
-// function loadProjects () {
-//     if (localStorage.getItem("projects") !== null) {
-//         projectsArr.length = 0;
-//         JSON.parse(localStorage.getItem("projects")).forEach(element => {
-//             projectsArr.push(element);
-//         });
-//     } else {
-//         localStorage.setItem("projects", JSON.stringify([createProject("Default")]));
-//     }
-// }
-
 function addProject (title) {
     if (title === "") 
         return;
 
-    projectsArr.push(createProject(title))
+    projectsArr.push(createProject(title));
+    setLocalStorageProjects(JSON.stringify(projectsArr));
 } 
-
-// function setLocalStorage () {
-//     localStorage.removeItem('projects');
-//     localStorage.setItem('projects', JSON.stringify(projectsArr));
-// }
 
 function deleteProject (uniqueID) {
     projectsArr.forEach((project, index) => {
@@ -39,23 +25,21 @@ function deleteProject (uniqueID) {
 }
 
 function getProjectArr () {
-    /*
-        const tempStorage = loadProjects();
-
-        if (tempStorage === 0) {
-            addProject('Default');
-            setLocalStorageProjects(JSON.stringify(projectsArr))
-        } else {
-            projectsArr.length = 0;
-            JSON.parse(tempStorage).forEach(element => {
-                projectsArr.push(element);
-            })    
-        }
-    */
-
-    if (projectsArr.length === 0) {
+    const tempStorage = loadProjects();
+    if (tempStorage === 0) {
         addProject('Default');
+        setLocalStorageProjects(JSON.stringify(projectsArr));
+    } else {
+        projectsArr.length = 0;
+        JSON.parse(tempStorage).forEach(element => {
+            projectsArr.push(element);
+        })    
     }
+    
+
+    // if (projectsArr.length === 0) {
+    //     addProject('Default');
+    // }
 
     return [...projectsArr];
 }

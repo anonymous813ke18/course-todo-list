@@ -1,5 +1,6 @@
 import { createSideBar } from "./sidebar.js";
-import { refreshMainBoard, createAddProjectModal } from "./screenController.js"
+import { refreshMainBoard, createAddProjectModal, createAddTodoModal, createEditTodoTitleModal, createEditTodoDescriptionModal } from "./screenController.js"
+import { removeTodo, updateStatus, updatePriority, updateProject, updateTitle } from "./todoManager.js";
 
 const mainContainer = document.querySelector('.container');
 const header = document.querySelector('header');
@@ -28,13 +29,53 @@ function addEventListeners () {
         })
         e.target.classList.add('selected');
         refreshMainBoard(e.target.dataset.projectid);
-    })
+    });
 
     const addProjectBtn = document.querySelector('.add-project-btn');
     addProjectBtn.addEventListener('click', e => {
-        // console.log('check')
         createAddProjectModal();
+    });;
+
+    const addTodoBtn = document.querySelector('.add-todo-btn');
+    addTodoBtn.addEventListener('click', e => {
+        createAddTodoModal();
+    });
+    
+    const mainBoard = document.querySelector('.main-board');
+    mainBoard.addEventListener('click', e => {
+        if ((!e.target.classList.contains('todo-card-button'))) 
+            return;
+
+        if (e.target.classList.contains('remove-btn')) {
+            removeTodo(e.target.dataset.id);
+            refreshMainBoard(e.target.dataset.projectid);
+        } else if (e.target.classList.contains('title-edit-button')) {
+            createEditTodoTitleModal(e.target.dataset.id);
+        } else if (e.target.classList.contains('description-edit-btn')) {
+            createEditTodoDescriptionModal(e.target.dataset.id);
+        }
+    });
+    mainBoard.addEventListener('change', e => {
+        if((!e.target.classList.contains('todo-select')) && (!e.target.classList.contains('todo-radioButton')))
+            return;
+
+        if (e.target.id === 'todo-status') {
+            updateStatus(e.target.dataset.id, e.target.value)
+        } else if (e.target.classList.contains('todo-radioButton')) {
+            updatePriority(e.target.dataset.id, e.target.value);
+        } else if (e.target.id === 'projects') {
+            updateProject(e.target.dataset.id, e.target.value);
+            quickRefresh();
+        }
     })
 }
 
-export { addEventListeners }
+function quickRefresh () {
+    const projectBtnContainer = document.querySelector('.project-btn-container');
+    Array.from(projectBtnContainer.children).forEach(child => {
+        if (child.classList.contains('selected'))
+            child.click();
+    });
+}
+
+export { addEventListeners, quickRefresh }
